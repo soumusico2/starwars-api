@@ -1,0 +1,20 @@
+version: '3'
+services:
+  starwars:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: starwars/api
+    ports:
+      - '8080:8080'
+    environment:
+      - ADDITIONAL_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n, -Xmx1G -Xms128m -XX:MaxMetaspaceSize=128m
+      - PROFILE=dev
+    links:
+      - db
+  db:
+    image: mongo
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGOCLIENT_DEFAULT_CONNECTION_URL=mongodb://mongo:27017
