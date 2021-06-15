@@ -1,10 +1,16 @@
 package br.com.starwarsapi.starwars.modal;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Document(collection = "planeta")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Planeta {
 	
 	@Id
@@ -15,13 +21,32 @@ public class Planeta {
 	private String terreno;
 	
 	
-	private String people;
-	private String planets;
-	private String films;
-	private String species;
-	private String vehicles;
-	private String starships;
+	private String rotation_period;
+	private String orbital_period;
+	private String diameter;
+	private String climate;
+	private String count;
 	
+	List<Resultado> results = new ArrayList<Resultado>();
+	
+	
+	
+	public List<Resultado> getResults() {
+		return results;
+	}
+
+	public void setResults(List<Resultado> results) {
+		this.results = results;
+	}
+
+	public String getCount() {
+		return count;
+	}
+
+	public void setCount(String count) {
+		this.count = count;
+	}
+
 	public Planeta() {}
 	
 	public Planeta(String nome, String clima, String terreno) {
@@ -38,32 +63,7 @@ public class Planeta {
 		this.terreno = planeta.getTerreno();
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getClima() {
-		return clima;
-	}
-	public void setClima(String clima) {
-		this.clima = clima;
-	}
-	public String getTerreno() {
-		return terreno;
-	}
-	public void setTerreno(String terreno) {
-		this.terreno = terreno;
-	}
+	
 
 	@Override
 	public int hashCode() {
@@ -90,79 +90,70 @@ public class Planeta {
 		return true;
 	}
 
-	public String getPeople() {
-		return people;
+	public String getId() {
+		return id;
 	}
 
-	public void setPeople(String people) {
-		this.people = people;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getPlanets() {
-		return planets;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setPlanets(String planets) {
-		this.planets = planets;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getFilms() {
-		return films;
+	public String getClima() {
+		return clima;
 	}
 
-	public void setFilms(String films) {
-		this.films = films;
+	public void setClima(String clima) {
+		this.clima = clima;
 	}
 
-	public String getSpecies() {
-		return species;
+	public String getTerreno() {
+		return terreno;
 	}
 
-	public void setSpecies(String species) {
-		this.species = species;
+	public void setTerreno(String terreno) {
+		this.terreno = terreno;
 	}
 
-	public String getVehicles() {
-		return vehicles;
+	public String getRotation_period() {
+		return rotation_period;
 	}
 
-	public void setVehicles(String vehicles) {
-		this.vehicles = vehicles;
+	public void setRotation_period(String rotation_period) {
+		this.rotation_period = rotation_period;
 	}
 
-	public String getStarships() {
-		return starships;
+	public String getOrbital_period() {
+		return orbital_period;
 	}
 
-	public void setStarships(String starships) {
-		this.starships = starships;
+	public void setOrbital_period(String orbital_period) {
+		this.orbital_period = orbital_period;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Planeta [id=");
-		builder.append(id);
-		builder.append(", nome=");
-		builder.append(nome);
-		builder.append(", clima=");
-		builder.append(clima);
-		builder.append(", terreno=");
-		builder.append(terreno);
-		builder.append(", people=");
-		builder.append(people);
-		builder.append(", planets=");
-		builder.append(planets);
-		builder.append(", films=");
-		builder.append(films);
-		builder.append(", species=");
-		builder.append(species);
-		builder.append(", vehicles=");
-		builder.append(vehicles);
-		builder.append(", starships=");
-		builder.append(starships);
-		builder.append("]");
-		return builder.toString();
+	public String getDiameter() {
+		return diameter;
 	}
+
+	public void setDiameter(String diameter) {
+		this.diameter = diameter;
+	}
+
+	public String getClimate() {
+		return climate;
+	}
+
+	public void setClimate(String climate) {
+		this.climate = climate;
+	}
+
+	
 	
 }
