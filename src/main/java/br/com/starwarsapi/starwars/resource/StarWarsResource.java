@@ -70,25 +70,26 @@ public class StarWarsResource {
 
 	}
 	 
-	@RequestMapping(value="/{id}", method = RequestMethod.GET) 
+	@RequestMapping(value="/buscarPorId/{id}", method = RequestMethod.GET) 
 	public ResponseEntity<Planeta> buscarPorId(@PathVariable String id) {
 	 
 	 return planetaService.buscarPorId(id);
 	  
 	}
-	 /*
-		@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-		public ResponseEntity<Planeta> remover(@PathVariable String id) {
-			
-			Optional<Planeta> planeta = planetaRepository.findById(id);
-
-			if (planeta.isPresent()) {
-				planetaRepository.deleteById(id);
-				return ResponseEntity.ok().build();
-			} else {
-				return ResponseEntity.notFound().build();
-			}
-		}
+	
+	@RequestMapping(value="/buscarPorNome/{nome}", method = RequestMethod.GET) 
+	public ResponseEntity<Planeta> buscarPorNome(@PathVariable String nome) {
 	 
-	*/
+	 return planetaService.buscarPorNome(nome);
+	  
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Planeta> remover(@PathVariable String id) {
+
+		return planetaService.remover(id);
+		
+	}
+	
+	
 }

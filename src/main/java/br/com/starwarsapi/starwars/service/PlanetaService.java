@@ -78,6 +78,30 @@ public class PlanetaService {
 		}
 	}
 	
+	public ResponseEntity<Planeta> buscarPorNome(String nome) {
+		Planeta planeta = planetaRepository.findByNome(nome);
+		
+		if(planeta != null) {
+			return ResponseEntity.ok().body(planeta);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	
+	public void remover(String id) {
+		
+		Optional<Planeta> planeta = planetaRepository.findById(id);
+
+		if (planeta.isPresent()) {
+			planetaRepository.deleteById(id);
+			return ResponseEntity.ok().build();
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	
 	private List<PlanetaRespostaApiDTO> validarPlaneta() {
 
 		PlanetaRespostaApiDTO planetaRespostaApi = new PlanetaRespostaApiDTO();
@@ -92,7 +116,6 @@ public class PlanetaService {
 		
 		 
 		 return planetaRespostaApiList;
-		 
-		 
+
 	}
 }
