@@ -84,12 +84,14 @@ public class StarWarsResource {
 	  
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Planeta> remover(@PathVariable String id) {
-
-		return planetaService.remover(id);
-		
-	}
+	/*
+	 * @RequestMapping(value = "/{id}", method = RequestMethod.DELETE) public
+	 * ResponseEntity<Planeta> remover(@PathVariable String id) {
+	 * 
+	 * return planetaService.remover(id);
+	 * 
+	 * }
+	 */
 	
 	
 }

@@ -89,17 +89,15 @@ public class PlanetaService {
 	}
 	
 	
-	public void remover(String id) {
-		
-		Optional<Planeta> planeta = planetaRepository.findById(id);
-
-		if (planeta.isPresent()) {
-			planetaRepository.deleteById(id);
-			return ResponseEntity.ok().build();
-		} else {
-			return ResponseEntity.notFound().build();
-		}
-	}
+	/*
+	 * public void remover(String id) {
+	 * 
+	 * Optional<Planeta> planeta = planetaRepository.findById(id);
+	 * 
+	 * if (planeta.isPresent()) { planetaRepository.deleteById(id); return
+	 * ResponseEntity.ok().build(); } else { return
+	 * ResponseEntity.notFound().build(); } }
+	 */
 	
 	
 	private List<PlanetaRespostaApiDTO> validarPlaneta() {
