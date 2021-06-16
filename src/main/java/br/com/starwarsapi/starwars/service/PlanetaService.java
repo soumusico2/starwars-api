@@ -64,7 +64,7 @@ public class PlanetaService {
 	
 	
 	
-	public List<PlanetaRespostaApiDTO> validarPlaneta() {
+	private List<PlanetaRespostaApiDTO> validarPlaneta() {
 
 		PlanetaRespostaApiDTO planetaRespostaApi = new PlanetaRespostaApiDTO();
 		List<PlanetaRespostaApiDTO> planetaRespostaApiList = new ArrayList<PlanetaRespostaApiDTO>();
