@@ -1,9 +1,12 @@
 package br.com.starwarsapi.starwars.resource;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,9 +35,8 @@ public class StarWarsResource {
 		return planetaService.cadastrar(planetaForm);
 	}
 
-	/*
-	 * BUSCA POR ID
-	 */
+	
+
 	/*
 	 * @RequestMapping(value="/buscaPorId/{id}", method = RequestMethod.GET) public
 	 * ResponseEntity<Optional<Planeta>> findById(@PathVariable String id) {
@@ -56,35 +58,37 @@ public class StarWarsResource {
 	 * return ResponseEntity.created(uri).body(new Planeta(planeta));
 	 * 
 	 * }
-	 * 
-	 * 
-	 * @RequestMapping(method = RequestMethod.GET) public
-	 * ResponseEntity<List<Planeta>> findAll() {
-	 * 
-	 * List<Planeta> planetas = planetaRepository.findAll();
-	 * 
-	 * return ResponseEntity.ok().body(planetas); }
-	 * 
-	 * 
-	 * 
-	 * BUSCA POR NOME
-	 * 
-	 * @RequestMapping(value="/buscaPorNome/{nome}", method = RequestMethod.GET)
-	 * public ResponseEntity<List<Planeta>> findByNome(@PathVariable String nome) {
-	 * 
-	 * List<Planeta> planetas = planetaRepository.findByNome(nome);
-	 * 
-	 * return ResponseEntity.ok().body(planetas); }
-	 * 
-	 * 
-	 * @RequestMapping(value="/{id}", method = RequestMethod.DELETE) public
-	 * ResponseEntity<Planeta> remover(@PathVariable String id) {
-	 * 
-	 * Optional<Planeta> planeta = planetaRepository.findById(id);
-	 * 
-	 * if(planeta.isPresent()) { planetaRepository.deleteById(id); return
-	 * ResponseEntity.ok().build(); } else { return
-	 * ResponseEntity.notFound().build(); } }
 	 */
+	 
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<Planeta>> findAll() {
 
+		List<Planeta> planetas = planetaService.listarPlanetas();
+	
+		return ResponseEntity.ok().body(planetas);
+
+	}
+	 
+	@RequestMapping(value="/{id}", method = RequestMethod.GET) 
+	public ResponseEntity<Planeta> buscarPorId(@PathVariable String id) {
+	 
+	 return planetaService.buscarPorId(id);
+	  
+	}
+	 /*
+		@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+		public ResponseEntity<Planeta> remover(@PathVariable String id) {
+			
+			Optional<Planeta> planeta = planetaRepository.findById(id);
+
+			if (planeta.isPresent()) {
+				planetaRepository.deleteById(id);
+				return ResponseEntity.ok().build();
+			} else {
+				return ResponseEntity.notFound().build();
+			}
+		}
+	 
+	*/
 }

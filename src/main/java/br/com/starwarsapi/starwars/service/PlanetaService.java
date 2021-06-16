@@ -63,6 +63,20 @@ public class PlanetaService {
 	}
 	
 	
+	public List<Planeta> listarPlanetas() {
+		return planetaRepository.findAll();
+	}
+	
+	public ResponseEntity<Planeta> buscarPorId(String id) {
+		
+		Optional<Planeta> planeta = planetaRepository.findById(id);
+
+		if (planeta.isPresent()) {
+			return ResponseEntity.ok().body(planeta.get());
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
 	
 	private List<PlanetaRespostaApiDTO> validarPlaneta() {
 
