@@ -1,28 +1,17 @@
 package br.com.starwarsapi.starwars.resource;
 
-import java.net.URI;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.starwarsapi.starwars.modal.People;
+import br.com.starwarsapi.starwars.dto.PlanetaDTO;
 import br.com.starwarsapi.starwars.modal.Planeta;
-import br.com.starwarsapi.starwars.repository.PlanetaRepository;
 import br.com.starwarsapi.starwars.service.PlanetaService;
 
 @RequestMapping("/starwars")
@@ -36,36 +25,11 @@ public class StarWarsResource {
 
 	RestTemplate restTemplate = new RestTemplate();
 
-	/*
-	 * BUSCA POR ID
-	 */
-	@RequestMapping(value = "/people/{id}", method = RequestMethod.GET)
-	public ResponseEntity<People> peopleFindById(@PathVariable Long id) {
+	
+	@RequestMapping(value = "/cadastrar" ,method = RequestMethod.POST)
+	public ResponseEntity<Planeta> cadastrar(@Valid @RequestBody PlanetaDTO planetaForm) throws Exception {
 
-		// headers = new HttpHeaders();
-		// headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		// headers.set("X-COM-PERSIST", "NO");
-		// headers.set("X-COM-LOCATION", "BR");
-
-		// HttpEntity<String> entity = new HttpEntity<String>(headers);
-
-		// ResponseEntity<String> response =
-		// restTemplate.exchange(uri.concat(id.toString()).concat("/"), HttpMethod.GET,
-		// entity, String.class);
-
-		People people = restTemplate.getForObject(uri.concat(id.toString()).concat("/"), People.class);
-
-		System.out.println(people.toString());
-
-		return ResponseEntity.ok().body(people);
-	}
-
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Planeta> cadastrar(@RequestBody Planeta planetaForm) {
-
-		Planeta planeta = planetaService.cadastrar(planetaForm);
-
-		return ResponseEntity.ok().body(planeta);
+		return planetaService.cadastrar(planetaForm);
 	}
 
 	/*
