@@ -5,11 +5,13 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,33 +37,7 @@ public class StarWarsResource {
 		return planetaService.cadastrar(planetaForm);
 	}
 
-	
-
-	/*
-	 * @RequestMapping(value="/buscaPorId/{id}", method = RequestMethod.GET) public
-	 * ResponseEntity<Optional<Planeta>> findById(@PathVariable String id) {
-	 * 
-	 * Optional<Planeta> planeta = planetaRepository.findById(id);
-	 * 
-	 * if(planeta.isPresent()) { return ResponseEntity.ok().body(planeta); } else {
-	 * return ResponseEntity.notFound().build(); } }
-	 */
-
-	/*
-	 * @RequestMapping(method = RequestMethod.POST) public ResponseEntity<Planeta>
-	 * cadastrar(@RequestBody Planeta planeta, UriComponentsBuilder uriBuilder) {
-	 * 
-	 * planetaRepository.save(planeta);
-	 * 
-	 * URI uri = uriBuilder.path("/starwars/{id}").build(planeta.getId());
-	 * 
-	 * return ResponseEntity.created(uri).body(new Planeta(planeta));
-	 * 
-	 * }
-	 */
-	 
-	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/listar", method = RequestMethod.GET)
 	public ResponseEntity<List<Planeta>> findAll() {
 
 		List<Planeta> planetas = planetaService.listarPlanetas();
@@ -89,6 +65,18 @@ public class StarWarsResource {
 
 		return planetaService.remover(id);
 		
+	}
+	
+	@RequestMapping(value = "/listarPorPage", method=RequestMethod.GET)
+	public ResponseEntity<Page<Planeta>> listarPorPagina(
+			@RequestParam(value="page", defaultValue="0") Integer page, 
+			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
+			@RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
+			@RequestParam(value="direction", defaultValue="ASC") String direction){
+		
+		Page<Planeta> cervejas = planetaService.listarPorPagina(page, linesPerPage, orderBy, direction);
+		
+		return ResponseEntity.ok().body(cervejas);
 	}
 	
 	

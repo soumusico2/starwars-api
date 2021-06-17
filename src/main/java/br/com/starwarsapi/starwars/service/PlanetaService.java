@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,9 +22,15 @@ import br.com.starwarsapi.starwars.repository.PlanetaRepository;
 
 @Service
 public class PlanetaService {
-
+	
+	
 	@Autowired
 	private PlanetaRepository planetaRepository;
+	
+	@Autowired
+	public PlanetaService(PlanetaRepository planetaRepository) {
+		this.planetaRepository = planetaRepository;
+	}
 	
 	private RestTemplate restTemplate = new RestTemplate();
 	
@@ -99,6 +108,12 @@ public class PlanetaService {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
+	}
+	
+	public Page<Planeta> listarPorPagina(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		
+		return planetaRepository.findAll(pageRequest);
 	}
 	
 	
