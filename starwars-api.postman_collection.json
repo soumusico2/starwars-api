@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "3b989914-3daf-41a3-9cf1-e0f9c9b86e6a",
+		"name": "starwars-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cadastrar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nome\": \"Tatooine\",\r\n\t\"clima\": \"Teste\", \r\n\t\"terreno\": \"Teste\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/starwars/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"starwars",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/starwars/listar",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"starwars",
+						"listar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/starwars/buscarPorId/60c95feeb97dea16da4859ff",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"starwars",
+						"buscarPorId",
+						"60c95feeb97dea16da4859ff"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/starwars/60c95feeb97dea16da4859fd",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"starwars",
+						"60c95feeb97dea16da4859fd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Por Nome",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/starwars/buscarPorNome/Tatooine",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"starwars",
+						"buscarPorNome",
+						"Tatooine"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista por Página",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/starwars/listarPorPage?page=1&linesPerPage=2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"starwars",
+						"listarPorPage"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "linesPerPage",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
